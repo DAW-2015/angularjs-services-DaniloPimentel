@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="utf-8">
+		<title>Exercício 2</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+		<script src="app.js"></script>
+	</head>
+	<body>
+
+		<div ng-controller="ComprasController as ctrl">
+			
+			<table>
+				<thead>
+					<tr>
+						<td>Descrição</td>
+						<td>Quantidade</td>
+						<td>Preço</td>
+					</tr>
+				</thead>
+				<tr ng-repeat="item in ctrl.itens">
+					<td>{{item.descricao}}</td>
+					<td>{{item.quantidade}}</td>
+					<td>{{item.preco | currency}}</td>
+					<td><button ng-click="ctrl.adicionar(item)">Adicionar</button></td>
+				</tr>
+			</table>
+
+		</div>
+
+		<div ng-controller="CheckoutController as ctrl">
+			
+			<h4>Carrinho</h4>
+
+			<table>
+				<tr ng-repeat="item in ctrl.itens track by $index">
+					<td>{{item.descricao}}</td>
+					<td>{{item.quantidade}}</td>
+					<td>{{item.preco | currency}}</td>
+					<!-- <td><button ng-click="ctrl.adicionar(item)">Adicionar</button></td> -->
+				</tr>
+			</table>
+
+			<p>
+				<b>Total: {{ctrl.total() | currency}}</b>
+			</p>
+
+		</div>
+
+	</body>
+</html>
