@@ -1,10 +1,24 @@
 var app = angular.module('myApp', []);
 
-app.controller('TemperaturaController', function() {
+app.controller('TemperaturaController', ['ConverterService', function(service) {
 
   this.celsius = 32.0;
 
   this.celsiusToKelvin = function(celsius) {
+    return service.celsiusToKelvin(celsius);
+  };
+
+  this.celsiusToFahrenheit = function(celsius) {
+    return service.celsiusToFahrenheit(celsius);
+  };
+
+}]);
+
+app.factory('ConverterService', function(){
+
+  var service = {};
+
+  service.celsiusToKelvin = function(celsius) {
     answer = parseInt(celsius) + 273.5;
     if (isNaN(answer)) {
       return 0;
@@ -13,7 +27,7 @@ app.controller('TemperaturaController', function() {
     }
   };
 
-  this.celsiusToFahrenheit = function(celsius) {
+  service.celsiusToFahrenheit = function(celsius) {
     answer = parseInt(celsius) * 1.8 + 32;
     if (isNaN(answer)) {
       return 0;
@@ -21,5 +35,7 @@ app.controller('TemperaturaController', function() {
       return  answer;
     }
   };
+
+  return service;
 
 });
